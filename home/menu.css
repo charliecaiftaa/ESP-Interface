@@ -1,0 +1,77 @@
+.panel-group .panel-heading a:after {
+  content: '-';
+}
+.panel-group .panel-heading a.collapsed:after {
+  content: '+';
+}
+.medium-3{
+  width:22%;
+}
+.switch
+{
+  position: relative;
+  margin-bottom:-1px;
+  display: inline-block;
+  width: 30px;
+  height: 12px;
+}
+
+.switch input
+{
+  display: none;
+}
+
+.slider
+{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before
+{
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 13px;
+  left: 2px;
+  bottom: 1.5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider
+{
+  background-color: #2196F3;
+}
+
+input:focus + .slider
+{
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before
+{
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+
+.slider.round
+{
+  border-radius: 10px;
+}
+
+.slider.round:before
+{
+  border-radius: 60%;
+}
