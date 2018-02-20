@@ -43,7 +43,7 @@ define([
              * @type {Boolean}
              * @default true
              */
-            this.enabled = true;
+            this.enabled = false;
 
             /**
              * Indicates whether this layer is pickable.
