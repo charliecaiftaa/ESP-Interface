@@ -1,18 +1,18 @@
-/*
-* Copyright 2015-2017 WorldWind Contributors
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ /*
+ * Copyright 2015-2017 WorldWind Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 requirejs(['./WorldWindShim',
         './LayerManager'],
@@ -48,18 +48,11 @@ requirejs(['./WorldWindShim',
         var serviceAddress = "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1";
         // Named layer displaying Average Temperature data
 
-        var layerName = ["City_Smart:Circuit_Direction","City_Smart:FUSE_2points_Kodiak"];
+        var layerName = ["City_Smart:KEAGridMap_Layer","City_Smart:OHC_3","City_Smart:Overhead_Transformers","City_Smart:OHC_1","City_Smart:OHC_2","City_Smart:UGC_1","City_Smart:UGC_2","City_Smart:UGC_3","City_Smart:Wire_Transmission_Kodiak","City_Smart:Kodiak_Large_Transformers","City_Smart:Kodiak_Small_Transformers","City_Smart:Airport_Substation","City_Smart:K_Subs","City_Smart:Kodiak_Substations","City_Smart:FUSE_line_Kodiak","City_Smart:power","City_Smart:power2","City_Smart:Line_WMS_Kodiak_Trident","City_Smart:Polygon_WMS_Kodiak_Trident","City_Smart:MANHOLE_line","City_Smart:MANHOLE_polygon","City_Smart:water2c_FTAA","City_Smart:water3_FTAA","City_Smart:water1c_FTAA","City_Smart:water2_FTAA","City_Smart:water3c_FTAA","City_Smart:water1_FTAA","City_Smart:BaseRoad_Layer","City_Smart:Kodiak_Road_System","City_Smart:KEAParcelMap_Layer"];
 
-        var Title = ["0","1","2","3","4","5","6","7","8"];
+        var layer = wwd.layers;
 
-        var layers = wwd.layers;
-
-        // $("#Cityssssmart").click(function() {
-        //     if ($('#Cityssssmart').is(":checked")) {
-        //         layers.enabled = true;
-        //     }
-        // });
-
+        console.log(layer);
 
         var createLayer = function (xmlDom) {
             // Create a WmsCapabilities object from the XML DOM
@@ -67,79 +60,97 @@ requirejs(['./WorldWindShim',
             // Retrieve a WmsLayerCapabilities object by the desired layer name
             for (var n = 0; n < layerName.length; n++) {
                 var NA = layerName[n];
-                var T = Title[n];
+
 
                 var wmsLayerCapabilities = wms.getNamedLayer(NA);
                 // Form a configuration object from the WmsLayerCapability object
                 var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
                 // Modify the configuration objects title property to a more user friendly title
-                wmsConfig.title = T;
-                console.log("s"+wmsConfig);
+                wmsConfig.title = NA;
                 // Create the WMS Layer from the configuration object
                 var wmsLayer = new WorldWind.WmsLayer(wmsConfig);
-
-                // wmsLayer = WorldWind.WmsLayer(wmsConfig);
                 // Add the layers to WorldWind and update the layer manager
-
                 wwd.addLayer(wmsLayer);
-
-                // console.log(wmsLayer);
-
                 // layerManager.synchronizeLayerList();
             }
 
-            // $("#Cityssssmart").click(function() {
-            //     if ($('#Cityssssmart').is(":checked")) {
-            //         alert("sfas");
-            //         wmsLayer['enabled'] = true;f
-            //         createLayer;
-            //     }
-            // });
         };
-
-        $("#Cityssssmart").click(function() {
-            if ($('#Cityssssmart').is(":checked")) {
-                layers[8].enabled = true;
-                $.get(serviceAddress).done(createLayer).fail(logError);
-            }else{
-                layers[8].enabled = false;
-                $.get(serviceAddress).done(createLayer).fail(logError);
-            }
-        });
-        //control the first layer
-
-        $("#Cityssssmart2").click(function() {
-            if ($('#Cityssssmart2').is(":checked")) {
-                layers[9].enabled = true;
-                $.get(serviceAddress).done(createLayer).fail(logError);
-            }else{
-                layers[9].enabled = false;
-                $.get(serviceAddress).done(createLayer).fail(logError);
-            }
-        });
-        //control the second layer
-
-
-
-
-        // // Called asynchronously to parse and create the WMS layer
-        // var createLayer = function (xmlDom) {
-        //     // Create a WmsCapabilities object from the XML DOM
-        //     var wms = new WorldWind.WmsCapabilities(xmlDom);
-        //     // Retrieve a WmsLayerCapabilities object by the desired layer name
-        //     var wmsLayerCapabilities = wms.getNamedLayer(layerName[1]);
-        //     console.log(layerName[0]);
-        //     // Form a configuration object from the WmsLayerCapability object
-        //     var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
-        //     // Modify the configuration objects title property to a more user friendly title
-        //     wmsConfig.title = Title[1];
-        //      // Create the WMS Layer from the configuration object
-        //     var wmsLayer = new WorldWind.WmsLayer(wmsConfig);
         //
-        //     // Add the layers to WorldWind and update the layer manager
-        //     wwd.addLayer(wmsLayer);
-        //     layerManager.synchronizeLayerList();
-        // };
+        // $(document).ready(function(){
+        //     console.log("sdasd");
+        //     var L = [];
+        //     $('.swith_right').val(function(i) {
+        //         L[i] = $(this).val();
+        //         console.log("value"+L)
+        //
+        //     });
+        //
+        // });
+
+
+        $(function(){
+            $('.switch_right').click(function(){
+                var val = [];
+                if ($('.switch_right').is(":checkbox:checked")) {
+
+                    // console.log("true"+val);
+
+                    $(':checkbox:checked').each(function (i) {
+                        val[i] = $(this).val();
+                        console.log(val);
+                        // console.log("checked" + val[i]);
+                        // console.log(val);
+                        // console.log("s"+layers[a].displayName);
+
+                        for (var a = 0; a < layers.length; a++) {
+                            if (layers[a].displayName === val[i]) {
+
+                                layers[a].enabled = true;
+                                // console.log(layers[a]);
+                            }else if (val[i] < 1){
+                                console.log("error");
+                            }
+
+                        }
+
+                    });
+                }
+
+                if($('.switch_right').is(":not(:checked)")) {
+                    // console.log("enable:false");
+                    var layer = [];
+                    $(":checkbox:not(:checked)").each(function (i) {
+                        layer[i] = $(this).val();
+                        // console.log(layer[i]);
+
+
+                        // console.log(val);
+                        // console.log("s"+layers[a].displayName);
+
+                        for (var a = 0; a < layers.length; a++) {
+                            if (layers[a].displayName === layer[i]) {
+
+                                layers[a].enabled = false;
+
+                                // console.log(layers[a]);
+                            }
+
+                        }
+
+                    });
+
+
+
+
+                }
+                // $.get(serviceAddress).done(createLayer).fail(logError);
+            });
+        });
+
+        //
+
+
+
 
         // Called if an error occurs during WMS Capabilities document retrieval
         var logError = function (jqXhr, text, exception) {
