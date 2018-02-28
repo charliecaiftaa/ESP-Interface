@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright 2015-2017 WorldWind Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +42,7 @@ requirejs(['./WorldWindShim',
         }
 
         // Create a layer manager for controlling layer visibility.
-         var layerManager = new LayerManager(wwd);
+        var layerManager = new LayerManager(wwd);
 
         // Web Map Service information from NASA's Near Earth Observations WMS
         var serviceAddress = "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1";
@@ -50,30 +50,17 @@ requirejs(['./WorldWindShim',
 
         var layerName = ["City_Smart:KEAGridMap_Layer","City_Smart:OHC_3","City_Smart:Overhead_Transformers","City_Smart:OHC_1","City_Smart:OHC_2","City_Smart:UGC_1","City_Smart:UGC_2","City_Smart:UGC_3","City_Smart:Wire_Transmission_Kodiak","City_Smart:Kodiak_Large_Transformers","City_Smart:Kodiak_Small_Transformers","City_Smart:Airport_Substation","City_Smart:K_Subs","City_Smart:Kodiak_Substations","City_Smart:FUSE_line_Kodiak","City_Smart:power","City_Smart:power2","City_Smart:Line_WMS_Kodiak_Trident","City_Smart:Polygon_WMS_Kodiak_Trident","City_Smart:MANHOLE_line","City_Smart:MANHOLE_polygon","City_Smart:water2c_FTAA","City_Smart:water3_FTAA","City_Smart:water1c_FTAA","City_Smart:water2_FTAA","City_Smart:water3c_FTAA","City_Smart:water1_FTAA","City_Smart:BaseRoad_Layer","City_Smart:Kodiak_Road_System","City_Smart:KEAParcelMap_Layer"];
         var layerName2 = [];
-        var layers = wwd.layers;
-        // var layer2 = [];
-        $(document).ready(function () {
-            $(".switch_right2").each(function (i) {
-                layerName2[i] = $(this).val();
-            });
-
-            // (layerName2).push(layer2);
-
-            console.log("array: "+ layerName);
-            console.log("array2: " + layerName2);
-        });
-
-
+        var layer = wwd.layers;
 
         var createLayer = function (xmlDom) {
             // Create a WmsCapabilities object from the XML DOM
             var wms = new WorldWind.WmsCapabilities(xmlDom);
             // Retrieve a WmsLayerCapabilities object by the desired layer name
-            for (var n = 0; n < layerName2.length; n++) {
-                var NA = layerName2[n];
+            for (var n = 0; n < layerName.length; n++) {
+                var NA = layerName[n];
+
 
                 var wmsLayerCapabilities = wms.getNamedLayer(NA);
-                console.log(wmsLayerCapabilities);
                 // Form a configuration object from the WmsLayerCapability object
                 var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
                 // Modify the configuration objects title property to a more user friendly title
@@ -83,9 +70,24 @@ requirejs(['./WorldWindShim',
                 // Add the layers to WorldWind and update the layer manager
                 wwd.addLayer(wmsLayer);
                 // layerManager.synchronizeLayerList();
+
+
             }
 
         };
+        console.log(layers);
+
+        var layer2 = [];
+        $(".switch_right").each(function (i) {
+            layer2[i] = $(this).val();
+        });
+
+        (layerName2).push(layer2);
+        console.log("array"+ layerName);
+        console.log("array2" + layerName2);
+
+
+
 
         $(function(){
             $('.switch_right').click(function(){
@@ -137,6 +139,10 @@ requirejs(['./WorldWindShim',
                         }
 
                     });
+
+
+
+
                 }
                 // $.get(serviceAddress).done(createLayer).fail(logError);
             });
@@ -145,13 +151,15 @@ requirejs(['./WorldWindShim',
         //
 
 
+
+
         // Called if an error occurs during WMS Capabilities document retrieval
         var logError = function (jqXhr, text, exception) {
             console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
         };
 
+
+
+
         $.get(serviceAddress).done(createLayer).fail(logError);
-
-        console.log(layers);
-
     });
