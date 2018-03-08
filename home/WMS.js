@@ -48,20 +48,38 @@ requirejs(['./WorldWindShim',
         var serviceAddress = "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1";
         // Named layer displaying Average Temperature data
 
-        var layerName = ["City_Smart:KEAGridMap_Layer","City_Smart:OHC_3","City_Smart:Overhead_Transformers","City_Smart:OHC_1","City_Smart:OHC_2","City_Smart:UGC_1","City_Smart:UGC_2","City_Smart:UGC_3","City_Smart:Wire_Transmission_Kodiak","City_Smart:Kodiak_Large_Transformers","City_Smart:Kodiak_Small_Transformers","City_Smart:Airport_Substation","City_Smart:K_Subs","City_Smart:Kodiak_Substations","City_Smart:FUSE_line_Kodiak","City_Smart:power","City_Smart:power2","City_Smart:Line_WMS_Kodiak_Trident","City_Smart:Polygon_WMS_Kodiak_Trident","City_Smart:MANHOLE_line","City_Smart:MANHOLE_polygon","City_Smart:water2c_FTAA","City_Smart:water3_FTAA","City_Smart:water1c_FTAA","City_Smart:water2_FTAA","City_Smart:water3c_FTAA","City_Smart:water1_FTAA","City_Smart:BaseRoad_Layer","City_Smart:Kodiak_Road_System","City_Smart:KEAParcelMap_Layer"];
-        var layerName2 = [];
+        // var layerName = ["City_Smart:KEAGridMap_Layer","City_Smart:OHC_3","City_Smart:Overhead_Transformers","City_Smart:OHC_1","City_Smart:OHC_2","City_Smart:UGC_1","City_Smart:UGC_2","City_Smart:UGC_3","City_Smart:Wire_Transmission_Kodiak","City_Smart:Kodiak_Large_Transformers","City_Smart:Kodiak_Small_Transformers","City_Smart:Airport_Substation","City_Smart:K_Subs","City_Smart:Kodiak_Substations","City_Smart:FUSE_line_Kodiak","City_Smart:power","City_Smart:power2","City_Smart:Line_WMS_Kodiak_Trident","City_Smart:Polygon_WMS_Kodiak_Trident","City_Smart:MANHOLE_line","City_Smart:MANHOLE_polygon","City_Smart:water2c_FTAA","City_Smart:water3_FTAA","City_Smart:water1c_FTAA","City_Smart:water2_FTAA","City_Smart:water3c_FTAA","City_Smart:water1_FTAA","City_Smart:BaseRoad_Layer","City_Smart:Kodiak_Road_System","City_Smart:KEAParcelMap_Layer"];
+        var layerName = [];
+
         var layers = wwd.layers;
         // var layer2 = [];
         $(document).ready(function () {
-            $(".switch_right2").each(function (i) {
-                layerName2[i] = $(this).val();
+
+            $(".switch_right").each(function (i) {
+
+                layerName[i] = $(this).val();
+
             });
-
             // (layerName2).push(layer2);
+            var strs = layerName+'';
 
-            console.log("array: "+ layerName);
-            console.log("array2: " + layerName2);
+            var res = strs.split(",");
+
+            layerName = res.slice(0);
+            console.log(layerName);
         });
+
+
+        // function splitString(stringToSplit, separator) {
+        //     var arrayOfStrings = stringToSplit.(separator);
+        //
+        //     console.log('The original string is: "' + stringToSplit + '"');
+        //     console.log('The separator is: "' + separator + '"');
+        //     console.log('The array has ' + arrayOfStrings.length + ' elements: ' + arrayOfStrings.join(' / '));
+        // }
+        // var comma = ',';
+        //
+        // splitString(layerName, comma);
 
 
 
@@ -69,8 +87,8 @@ requirejs(['./WorldWindShim',
             // Create a WmsCapabilities object from the XML DOM
             var wms = new WorldWind.WmsCapabilities(xmlDom);
             // Retrieve a WmsLayerCapabilities object by the desired layer name
-            for (var n = 0; n < layerName2.length; n++) {
-                var NA = layerName2[n];
+            for (var n = 0; n < layerName.length; n++) {
+                var NA = layerName[n];
 
                 var wmsLayerCapabilities = wms.getNamedLayer(NA);
                 console.log(wmsLayerCapabilities);
@@ -94,22 +112,21 @@ requirejs(['./WorldWindShim',
 
                     // console.log("true"+val);
 
-                    $(':checkbox:checked').each(function (i) {
-                        val[i] = $(this).val();
-                        console.log(val);
-                        // console.log("checked" + val[i]);
-                        // console.log(val);
-                        // console.log("s"+layers[a].displayName);
+                    $(':checkbox:checked').each(function () {
+                        val = $(this).val();
+                        var str = val+'';
+                        val = str.split(",");
 
                         for (var a = 0; a < layers.length; a++) {
-                            if (layers[a].displayName === val[i]) {
+                                for(var i = 0; i < val.length; i++) {
+                                if (layers[a].displayName === val[i]) {
 
-                                layers[a].enabled = true;
-                                // console.log(layers[a]);
-                            }else if (val[i] < 1){
-                                console.log("error");
+                                    layers[a].enabled = true;
+
+                                } else if (val.length < 1 ) {
+                                    console.log("error");
+                                }
                             }
-
                         }
 
                     });
@@ -119,7 +136,10 @@ requirejs(['./WorldWindShim',
                     // console.log("enable:false");
                     var layer = [];
                     $(":checkbox:not(:checked)").each(function (i) {
-                        layer[i] = $(this).val();
+                        layer = $(this).val();
+                        var str = layer+'';
+                        layer = str.split(",");
+                        // console.log(str);
                         // console.log(layer[i]);
 
 
@@ -127,13 +147,14 @@ requirejs(['./WorldWindShim',
                         // console.log("s"+layers[a].displayName);
 
                         for (var a = 0; a < layers.length; a++) {
-                            if (layers[a].displayName === layer[i]) {
+                            for(var l = 0; l < layer.length; l++) {
+                            if (layers[a].displayName === layer[l]) {
 
                                 layers[a].enabled = false;
-
+                                console.log("str: " + layers[a].displayName);
                                 // console.log(layers[a]);
                             }
-
+                        }
                         }
 
                     });
@@ -154,4 +175,5 @@ requirejs(['./WorldWindShim',
 
         console.log(layers);
 
+        var layers = wwd.layers;
     });
