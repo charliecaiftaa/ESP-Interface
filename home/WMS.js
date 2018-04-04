@@ -51,13 +51,12 @@ requirejs(['./WorldWindShim',
         // var layerName = ["City_Smart:KEAGridMap_Layer","City_Smart:OHC_3","City_Smart:Overhead_Transformers","City_Smart:OHC_1","City_Smart:OHC_2","City_Smart:UGC_1","City_Smart:UGC_2","City_Smart:UGC_3","City_Smart:Wire_Transmission_Kodiak","City_Smart:Kodiak_Large_Transformers","City_Smart:Kodiak_Small_Transformers","City_Smart:Airport_Substation","City_Smart:K_Subs","City_Smart:Kodiak_Substations","City_Smart:FUSE_line_Kodiak","City_Smart:power","City_Smart:power2","City_Smart:Line_WMS_Kodiak_Trident","City_Smart:Polygon_WMS_Kodiak_Trident","City_Smart:MANHOLE_line","City_Smart:MANHOLE_polygon","City_Smart:water2c_FTAA","City_Smart:water3_FTAA","City_Smart:water1c_FTAA","City_Smart:water2_FTAA","City_Smart:water3c_FTAA","City_Smart:water1_FTAA","City_Smart:BaseRoad_Layer","City_Smart:Kodiak_Road_System","City_Smart:KEAParcelMap_Layer"];
         var layerName = [];
 
-        var layers = wwd.layers;
         // var layer2 = [];
         $(document).ready(function () {
 
             $(".switch_right").each(function (i) {
 
-                layerName[i] = $(this).val();
+               layerName[i] = $(this).val();
 
             });
             // (layerName2).push(layer2);
@@ -66,7 +65,7 @@ requirejs(['./WorldWindShim',
             var res = strs.split(",");
 
             layerName = res.slice(0);
-            console.log(layerName);
+
         });
 
 
@@ -87,6 +86,7 @@ requirejs(['./WorldWindShim',
             // Create a WmsCapabilities object from the XML DOM
             var wms = new WorldWind.WmsCapabilities(xmlDom);
             // Retrieve a WmsLayerCapabilities object by the desired layer name
+
             for (var n = 0; n < layerName.length; n++) {
                 var NA = layerName[n];
 
@@ -163,9 +163,120 @@ requirejs(['./WorldWindShim',
             });
         });
 
-        //
+        $(document).ready(function(){
+            $.ajax({
+                type: "GET",
+                url: "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1",
+                dataType: "xml",
+                success: function(xml){
+                    $(xml).find('Layer').each(function(){
+                         var sTitle = $(this).find('Name').text();
+                        layerName.push(sTitle);
+                    });
+                    console.log(layerName);
+                    },
+                error: function() {
+                    alert("An error occurred while processing XML file.");
+                }
+            });
+        });
 
 
+        var MenuName = "123";
+
+        $(document).ready(function(){
+
+
+        // function createflayer(){
+            var divf = document.createElement("div");
+            divf.className = "col-sm-3";
+            var h4 = document.createElement("h4");
+            var node = document.createTextNode("Menu");
+            var divf2 = document.createElement("div");
+                divf2.className = "container";
+            var div3 = document.createElement("div");
+                div3.className ="panel-group medium-3";
+                div3.id = "accordion";
+            var div4 = document.createElement("div");
+                div4.className ="panel panel-default";
+
+
+            divf.appendChild(h4);
+            divf.appendChild(divf2);
+            divf2.appendChild(div3);
+            div3.appendChild(div4);
+            h4.appendChild(node);
+            // console.log(div);
+        // }
+
+
+        layerName.forEach(function(n) {
+
+        // function createlayerN(){
+            var div6 = document.createElement("div");
+                div6.className = "panel-heading";
+            var h4 = document.createElement("h4");
+            h4.className ="panel-title";
+            var node2 = document.createTextNode(MenuName);
+            var a = document.createElement("a");
+                a.className="collapsed";
+                a.setAttribute("data-toggle","collapse");
+                a.setAttribute("data-parent","#nested1");
+                a.href="#collapseOne";
+            var div2 = document.createElement("div");
+                div2.id ="nested1-collapseOne";
+                div2.className = "panel-collapse collapse";
+                h4.appendChild(a);
+                a.appendChild(node2);
+                div6.appendChild(h4);
+                // console.log(div);
+            var divL = document.createElement("div");
+            divL.className = "panel-collapse collapse";
+            divL.id = "nested1-collapseOne";
+            var divL2 = document.createElement("div");
+            divL2.className="panel-body";
+            divL.appendChild(divL2);
+            div6.appendChild(divL);
+
+            // console.log(div);
+        // }
+
+
+            var element = document.getElementById("lol");
+            // console.log(element);
+            var divE3 = document.createElement("div");
+            var h = document.createElement("h5");
+            for(var s = 0; s < layerName.length; s++) {
+                var a2 = document.createElement("a");
+                var node = document.createTextNode(n);
+                // console.log(node);
+            }
+            var lab = document.createElement("label");
+            lab.className = "swith right";
+            var span = document.createElement("span");
+            span.className = "slider round";
+            for(var b = 0; b < layerName.length; b++) {
+
+            var checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.setAttribute("value", n);
+
+            }
+            checkbox.className = "swith_right";
+            lab.appendChild(checkbox);
+            lab.appendChild(span);
+            a2.appendChild(node);
+            h.appendChild(a2);
+            h.appendChild(lab);
+            divE3.appendChild(h);
+            divL2.appendChild(divE3);
+            lol.appendChild(div6);
+            console.log(div6)
+
+        });
+        // });
+
+            });
         // Called if an error occurs during WMS Capabilities document retrieval
         var logError = function (jqXhr, text, exception) {
             console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
