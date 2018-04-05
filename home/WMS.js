@@ -270,7 +270,7 @@ requirejs(['./WorldWindShim',
             h.appendChild(lab);
             divE3.appendChild(h);
             divL2.appendChild(divE3);
-            lol.appendChild(div6);
+            element.appendChild(div6);
             console.log(div6)
 
         });
