@@ -15,52 +15,34 @@
 */
 
 requirejs(['./WorldWindShim',
-        './LayerManager',
-        './GlobeInterface',
-        './Globe',
-        './Controls',
-        './HeatmapPanel'],
+        './LayerManager'],
     function (WorldWind,
-              LayerManager,
-              GlobeInterface,
-              Globe,
-              Controls,
-              HeatmapPanel) {
+              LayerManager) {
         "use strict";
-
-        var globeID = "canvasOne";
-
-        // new ESTWA({globe: globeID});
-
-        var globe = new Globe({id: globeID});
-        var controls = new Controls(globe);
-        var gInterface = new GlobeInterface(globe);
-
-        var heatmapPanel = new HeatmapPanel(globe, gInterface.globe.navigator, gInterface.globe.worldWindowController, controls);
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
-        // var wwd = new WorldWind.WorldWindow("canvasOne");
-        //
-        // // Standard WorldWind layers
-        // var layers = [
-        //     {layer: new WorldWind.BMNGLayer(), enabled: true},
-        //     {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
-        //     {layer: new WorldWind.BingAerialLayer(null), enabled: false},
-        //     {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},
-        //     {layer: new WorldWind.BingRoadsLayer(null), enabled: false},
-        //     {layer: new WorldWind.CompassLayer(), enabled: true},
-        //     {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-        //     {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
-        // ];
-        //
-        // for (var l = 0; l < layers.length; l++) {
-        //     layers[l].layer.enabled = layers[l].enabled;
-        //     wwd.addLayer(layers[l].layer);
-        // }
+        var wwd = new WorldWind.WorldWindow("canvasOne");
+
+        // Standard WorldWind layers
+        var layers = [
+            {layer: new WorldWind.BMNGLayer(), enabled: true},
+            {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
+            {layer: new WorldWind.BingAerialLayer(null), enabled: false},
+            {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},
+            {layer: new WorldWind.BingRoadsLayer(null), enabled: false},
+            {layer: new WorldWind.CompassLayer(), enabled: true},
+            {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
+            {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+        ];
+
+        for (var l = 0; l < layers.length; l++) {
+            layers[l].layer.enabled = layers[l].enabled;
+            wwd.addLayer(layers[l].layer);
+        }
 
         // Create a layer manager for controlling layer visibility.
-        var layerManager = new LayerManager(globe);
+        var layerManager = new LayerManager(wwd);
 
         // Web Map Service information from NASA's Near Earth Observations WMS
         var serviceAddress = "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1";
@@ -69,7 +51,7 @@ requirejs(['./WorldWindShim',
         // var layerName = ["City_Smart:KEAGridMap_Layer","City_Smart:OHC_3","City_Smart:Overhead_Transformers","City_Smart:OHC_1","City_Smart:OHC_2","City_Smart:UGC_1","City_Smart:UGC_2","City_Smart:UGC_3","City_Smart:Wire_Transmission_Kodiak","City_Smart:Kodiak_Large_Transformers","City_Smart:Kodiak_Small_Transformers","City_Smart:Airport_Substation","City_Smart:K_Subs","City_Smart:Kodiak_Substations","City_Smart:FUSE_line_Kodiak","City_Smart:power","City_Smart:power2","City_Smart:Line_WMS_Kodiak_Trident","City_Smart:Polygon_WMS_Kodiak_Trident","City_Smart:MANHOLE_line","City_Smart:MANHOLE_polygon","City_Smart:water2c_FTAA","City_Smart:water3_FTAA","City_Smart:water1c_FTAA","City_Smart:water2_FTAA","City_Smart:water3c_FTAA","City_Smart:water1_FTAA","City_Smart:BaseRoad_Layer","City_Smart:Kodiak_Road_System","City_Smart:KEAParcelMap_Layer"];
         var layerName = [];
 
-        var layers = globe.layers;
+        var layers = wwd.layers;
         // var layer2 = [];
         $(document).ready(function () {
 
@@ -117,9 +99,10 @@ requirejs(['./WorldWindShim',
                 // Create the WMS Layer from the configuration object
                 var wmsLayer = new WorldWind.WmsLayer(wmsConfig);
                 // Add the layers to WorldWind and update the layer manager
-                globe.addLayer(wmsLayer);
+                wwd.addLayer(wmsLayer);
                 // layerManager.synchronizeLayerList();
             }
+            console.log(wwd.layers);
 
         };
 
@@ -193,5 +176,5 @@ requirejs(['./WorldWindShim',
 
         console.log(layers);
 
-        var layers = globe.layers;
+        var layers = wwd.layers;
     });
