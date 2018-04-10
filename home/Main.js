@@ -23,6 +23,7 @@ requirejs(['./WorldWindShim',
         './HeatmapPanel'],
     function (WorldWind,
               LayerManager,
+              OptionList,
               GlobeInterface,
               Globe,
               Controls,
@@ -40,6 +41,25 @@ requirejs(['./WorldWindShim',
         var heatmapPanel = new HeatmapPanel(globe, gInterface.globe.navigator, gInterface.globe.worldWindowController, controls);
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
+
+        // var wwd = new WorldWind.WorldWindow("canvasOne");
+        //
+        // // Standard WorldWind layers
+        // var layers = [
+        //     {layer: new WorldWind.BMNGLayer(), enabled: true},
+        //     {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
+        //     {layer: new WorldWind.BingAerialLayer(null), enabled: false},
+        //     {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},
+        //     {layer: new WorldWind.BingRoadsLayer(null), enabled: false},
+        //     {layer: new WorldWind.CompassLayer(), enabled: true},
+        //     {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
+        //     {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+        // ];
+        //
+        // for (var l = 0; l < layers.length; l++) {
+        //     layers[l].layer.enabled = layers[l].enabled;
+        //     wwd.addLayer(layers[l].layer);
+        // }
 
         // Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(globe);
@@ -59,7 +79,7 @@ requirejs(['./WorldWindShim',
                 layerName[i] = $(this).val();
 
             });
-
+            // (layerName2).push(layer2);
             var strs = layerName+'';
 
             var res = strs.split(",");
@@ -67,6 +87,20 @@ requirejs(['./WorldWindShim',
             layerName = res.slice(0);
             // console.log(layerName);
         });
+
+
+        // function splitString(stringToSplit, separator) {
+        //     var arrayOfStrings = stringToSplit.(separator);
+        //
+        //     console.log('The original string is: "' + stringToSplit + '"');
+        //     console.log('The separator is: "' + separator + '"');
+        //     console.log('The array has ' + arrayOfStrings.length + ' elements: ' + arrayOfStrings.join(' / '));
+        // }
+        // var comma = ',';
+        //
+        // splitString(layerName, comma);
+
+
 
         var createLayer = function (xmlDom) {
             // Create a WmsCapabilities object from the XML DOM
