@@ -84,7 +84,7 @@ requirejs(['./WorldWindShim',
             var res = strs.split(",");
 
             layerName = res.slice(0);
-            console.log(layerName);
+            // console.log(layerName);
         });
 
 
@@ -109,7 +109,7 @@ requirejs(['./WorldWindShim',
                 var NA = layerName[n];
 
                 var wmsLayerCapabilities = wms.getNamedLayer(NA);
-                console.log(wmsLayerCapabilities);
+                // console.log(wmsLayerCapabilities);
                 // Form a configuration object from the WmsLayerCapability object
                 var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
                 // Modify the configuration objects title property to a more user friendly title
@@ -191,7 +191,7 @@ requirejs(['./WorldWindShim',
 
         $.get(serviceAddress).done(createLayer).fail(logError);
 
-        console.log(layers);
+        // console.log(layers);
 
         var layers = globe.layers;
     });
