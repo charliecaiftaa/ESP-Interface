@@ -16,6 +16,7 @@
 
 requirejs(['./WorldWindShim',
         './LayerManager',
+        './OptionList',
         './GlobeInterface',
         './Globe',
         './Controls',
@@ -40,25 +41,6 @@ requirejs(['./WorldWindShim',
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
-        // var wwd = new WorldWind.WorldWindow("canvasOne");
-        //
-        // // Standard WorldWind layers
-        // var layers = [
-        //     {layer: new WorldWind.BMNGLayer(), enabled: true},
-        //     {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
-        //     {layer: new WorldWind.BingAerialLayer(null), enabled: false},
-        //     {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},
-        //     {layer: new WorldWind.BingRoadsLayer(null), enabled: false},
-        //     {layer: new WorldWind.CompassLayer(), enabled: true},
-        //     {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-        //     {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
-        // ];
-        //
-        // for (var l = 0; l < layers.length; l++) {
-        //     layers[l].layer.enabled = layers[l].enabled;
-        //     wwd.addLayer(layers[l].layer);
-        // }
-
         // Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(globe);
 
@@ -71,14 +53,13 @@ requirejs(['./WorldWindShim',
 
         var layers = globe.layers;
         // var layer2 = [];
+
         $(document).ready(function () {
-
             $(".switch_right").each(function (i) {
-
                 layerName[i] = $(this).val();
 
             });
-            // (layerName2).push(layer2);
+
             var strs = layerName+'';
 
             var res = strs.split(",");
@@ -86,20 +67,6 @@ requirejs(['./WorldWindShim',
             layerName = res.slice(0);
             // console.log(layerName);
         });
-
-
-        // function splitString(stringToSplit, separator) {
-        //     var arrayOfStrings = stringToSplit.(separator);
-        //
-        //     console.log('The original string is: "' + stringToSplit + '"');
-        //     console.log('The separator is: "' + separator + '"');
-        //     console.log('The array has ' + arrayOfStrings.length + ' elements: ' + arrayOfStrings.join(' / '));
-        // }
-        // var comma = ',';
-        //
-        // splitString(layerName, comma);
-
-
 
         var createLayer = function (xmlDom) {
             // Create a WmsCapabilities object from the XML DOM
@@ -181,7 +148,24 @@ requirejs(['./WorldWindShim',
             });
         });
 
-        //
+        $(document).ready(function(){
+            $.ajax({
+                type: "GET",
+                url: "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1",
+                dataType: "xml",
+                success: function(xml){
+                    $(xml).find('Layer').each(function(){
+                         var sTitle = $(this).find('Name').text();
+                        layerName.push(sTitle);
+                    });
+                    console.log(layerName);
+                    },
+                error: function() {
+                    alert("An error occurred while processing XML file.");
+                }
+            });
+        });
+
 
 
         // Called if an error occurs during WMS Capabilities document retrieval

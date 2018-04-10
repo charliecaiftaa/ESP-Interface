@@ -37,7 +37,7 @@
     "grunt-contrib-requirejs": "^1.0.0",
     "grunt-jsdoc": "^2.2.0",
     "grunt-karma": "^2.0.0",
-    "jasmine-core": "^2.99.1",
+    "jasmine-core": "^2.8.0",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.0.0",
     "karma-htmlfile-reporter": "^0.3.4",
@@ -65,6 +65,10 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "express": "^5.0.0-alpha.6",
+    "mysql": "^2.15.0"
   },
   "dependencies": {
     "npm": "^5.7.1"

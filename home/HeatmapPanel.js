@@ -33,7 +33,6 @@ define(['./Transformation',
 
         });
         $("#loadHeatmapBtn").on("click", function () {
-            alert("SSS");
             self.requestData();
         })
 
