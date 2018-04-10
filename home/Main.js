@@ -16,12 +16,14 @@
 
 requirejs(['./WorldWindShim',
         './LayerManager',
+        './OptionList',
         './GlobeInterface',
         './Globe',
         './Controls',
         './HeatmapPanel'],
     function (WorldWind,
               LayerManager,
+              OptionList,
               GlobeInterface,
               Globe,
               Controls,
@@ -59,6 +61,7 @@ requirejs(['./WorldWindShim',
         //     wwd.addLayer(layers[l].layer);
         // }
 
+
         // Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(globe);
 
@@ -71,10 +74,9 @@ requirejs(['./WorldWindShim',
 
         var layers = globe.layers;
         // var layer2 = [];
+
         $(document).ready(function () {
-
             $(".switch_right").each(function (i) {
-
                 layerName[i] = $(this).val();
 
             });
@@ -84,7 +86,6 @@ requirejs(['./WorldWindShim',
             var res = strs.split(",");
 
             layerName = res.slice(0);
-            console.log(layerName);
         });
 
 
@@ -181,7 +182,24 @@ requirejs(['./WorldWindShim',
             });
         });
 
-        //
+        $(document).ready(function(){
+            $.ajax({
+                type: "GET",
+                url: "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1",
+                dataType: "xml",
+                success: function(xml){
+                    $(xml).find('Layer').each(function(){
+                         var sTitle = $(this).find('Name').text();
+                        layerName.push(sTitle);
+                    });
+                    console.log(layerName);
+                    },
+                error: function() {
+                    alert("An error occurred while processing XML file.");
+                }
+            });
+        });
+
 
 
         // Called if an error occurs during WMS Capabilities document retrieval
