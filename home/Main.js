@@ -192,7 +192,7 @@ requirejs(['./WorldWindShim',
                          var sTitle = $(this).find('Name').text();
                         layerName.push(sTitle);
                     });
-                    console.log(layerName);
+                    // console.log(layerName);
                     },
                 error: function() {
                     alert("An error occurred while processing XML file.");

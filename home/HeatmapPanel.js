@@ -44,13 +44,13 @@ define(['./Transformation',
         var self = this;
 
         $.ajax({
-            url: 'http://localhost:9091/heatmap',
+            url: 'http://localhost:9090/heatmap',
             type: 'GET',
             dataType: 'json',
             async: false,
             // data: querystr,
             success: function (resp) {
-                console.log(resp);
+                // console.log(resp);
                 var heatMapData = [];
                 var intensities = [];
                 for (var i = 0; i < resp.length; i++) {
@@ -89,7 +89,7 @@ define(['./Transformation',
         heat.canvas = canvas;
         heat.max(5);
 
-        console.log(heat.points);
+        // console.log(heat.points);
 
         var heatmap = new WorldWind.SurfaceImage(new WorldWind.Sector(-90, 90, -180, 180),
             new WorldWind.ImageSource(canvas));
@@ -109,7 +109,7 @@ define(['./Transformation',
         heatmapLayer.addRenderable(heatmap);
         wwd.addLayer(heatmapLayer);
 
-        console.log(wwd.layers);
+        // console.log(wwd.layers);
 
         var navigator = this.navigator;
         var controller = this.controller;
