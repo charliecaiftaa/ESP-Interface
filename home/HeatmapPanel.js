@@ -44,7 +44,7 @@ define(['./Transformation',
         var self = this;
 
         $.ajax({
-            url: 'http://localhost:8091/heatmap',
+            url: 'http://localhost:9090/heatmap',
             type: 'GET',
             dataType: 'json',
             async: false,
