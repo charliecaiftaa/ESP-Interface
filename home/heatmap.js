@@ -1,20 +1,20 @@
 var express  = require('express');
 var app      = express();
 var mysql = require('mysql');
-var port = 8091;
+var port = 9091;
 
 var connection = mysql.createConnection({
     multipleStatements: true,
     host: '10.11.4.97',
     user: 'AppUser',
     password: 'Special888%',
-    database: 'whs'
+    database: 'FAWv4'
 });
 
 app.get('/heatmap', function(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*"); // Allow cross domain header
 
-    var myStat = "SELECT LatiDecimal, LongDecimal FROM whs.Sites WHERE LatiDecimal != '' AND LongDecimal != '';";
+    var myStat = "SELECT latitude, longitude FROM FAWv4.Historical_Heatmap_Data;";
 
     connection.query(myStat, function(err, results, fields) {
         if (err) {
