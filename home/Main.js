@@ -210,6 +210,4 @@ requirejs(['./WorldWindShim',
         $.get(serviceAddress).done(createLayer).fail(logError);
 
         // console.log(layers);
-
-        var layers = globe.layers;
     });
