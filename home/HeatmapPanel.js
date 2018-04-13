@@ -3,7 +3,9 @@
 //     '../../thirdparty/simpleheat'], function (Transformation, Converter) {
 
 define(['./Transformation',
-    './simpleheat'], function (Transformation) {
+    '../src/geom/Angle',
+    '../src/util/WWMath',
+    './simpleheat'], function (Transformation, Angle, WWMath) {
 
     var HeatmapPanel = function (wwd, navigator, controller, controls) {
     // var HeatmapPanel = function (wwd, controls) {
@@ -44,13 +46,12 @@ define(['./Transformation',
         var self = this;
 
         $.ajax({
-            url: 'http://localhost:9090/heatmap',
+            url: 'http://localhost:9091/heatmap',
             type: 'GET',
             dataType: 'json',
             async: false,
             // data: querystr,
             success: function (resp) {
-                // console.log(resp);
                 var heatMapData = [];
                 var intensities = [];
                 for (var i = 0; i < resp.length; i++) {
@@ -72,7 +73,6 @@ define(['./Transformation',
     };
 
     HeatmapPanel.prototype.addHeatmap = function (points, intensities) {
-
         var self = this;
         var wwd = this.wwd;
 
@@ -88,8 +88,6 @@ define(['./Transformation',
         heat.intensities = intensities;
         heat.canvas = canvas;
         heat.max(5);
-
-        // console.log(heat.points);
 
         var heatmap = new WorldWind.SurfaceImage(new WorldWind.Sector(-90, 90, -180, 180),
             new WorldWind.ImageSource(canvas));
@@ -109,14 +107,53 @@ define(['./Transformation',
         heatmapLayer.addRenderable(heatmap);
         wwd.addLayer(heatmapLayer);
 
-        // console.log(wwd.layers);
-
         var navigator = this.navigator;
         var controller = this.controller;
 
         wwd.redraw();
 
         self.createInterface(wwd);
+
+        // wwd.addEventListener("click", function (event) {
+        //     self.drawHeatmap(navigator.range);
+        // });
+
+        // Intentionally not documented.
+        controller.handlePanOrDrag3D = function (recognizer) {
+            var state = recognizer.state,
+                tx = recognizer.translationX,
+                ty = recognizer.translationY;
+
+            var navigator = this.wwd.navigator;
+            if (state === WorldWind.BEGAN) {
+                navigator.lastPoint.set(0, 0);
+            } else if (state === WorldWind.CHANGED) {
+                // Convert the translation from screen coordinates to arc degrees. Use this navigator's range as a
+                // metric for converting screen pixels to meters, and use the globe's radius for converting from meters
+                // to arc degrees.
+                var canvas = this.wwd.canvas,
+                    globe = this.wwd.globe,
+                    globeRadius = WWMath.max(globe.equatorialRadius, globe.polarRadius),
+                    distance = WWMath.max(1, navigator.range),
+                    metersPerPixel = WWMath.perspectivePixelSize(canvas.clientWidth, canvas.clientHeight, distance),
+                    forwardMeters = (ty - navigator.lastPoint[1]) * metersPerPixel,
+                    sideMeters = -(tx - navigator.lastPoint[0]) * metersPerPixel,
+                    forwardDegrees = (forwardMeters / globeRadius) * Angle.RADIANS_TO_DEGREES,
+                    sideDegrees = (sideMeters / globeRadius) * Angle.RADIANS_TO_DEGREES;
+
+                // Apply the change in latitude and longitude to this navigator, relative to the current heading.
+                var sinHeading = Math.sin(navigator.heading * Angle.DEGREES_TO_RADIANS),
+                    cosHeading = Math.cos(navigator.heading * Angle.DEGREES_TO_RADIANS);
+
+                navigator.lookAtLocation.latitude += forwardDegrees * cosHeading - sideDegrees * sinHeading;
+                navigator.lookAtLocation.longitude += forwardDegrees * sinHeading + sideDegrees * cosHeading;
+                navigator.lastPoint.set(tx, ty);
+                this.applyLimits();
+                this.wwd.redraw();
+                console.log("A");
+                self.drawHeatmap(navigator.range);
+            }
+        };
 
         controller.handleWheelEvent = function (event) {
 
@@ -145,7 +182,6 @@ define(['./Transformation',
         this.controls.heatmap = this.drawHeatmap.bind(this);
 
         wwd.goTo(new WorldWind.Position(points[0][1], points[0][0]), function () {
-            console.log(navigator.range);
             self.drawHeatmap(navigator.range);
         });
     };
