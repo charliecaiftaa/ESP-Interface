@@ -6,6 +6,7 @@
 
 
     <meta charset="utf-8"/>
+    <title>CitySmart - WorldWise v2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
@@ -14,11 +15,68 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script data-main="Main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+    <style>
+
+
+        .popup-group {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(220, 220, 220, 0.51);
+            display: none
+        }
+        .popupBoxWrapper{
+            max-width: 750px; margin: auto;
+            text-align: left; max-height: calc(80%); overflow: auto; z-index: 1
+        }
+        .popupBoxContent{
+            background-color: #FFF; padding: 15px; overflow: scroll;
+        }
+        .popup-Header {
+            padding: 10px 16px;
+            background-color: #75b6cc;
+            color: white;
+        }
+        .close {
+            color: red;
+            float: right;
+            font-size: 38px;
+            font-weight: bold;
+        }
+        .popup-Body {padding: 2px 16px;}
+
+        .popup-Footer {
+            padding: 50px 30px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        .popup-Footer {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+
+        }
+    </style>
 </head>
 <body>
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <p>Some text in the Modal..</p>
+    </div>
+
+</div>
 <div class="container">
     <div>
-        <img src="TL_WB_Banner.jpg" align="middle" alt="Placeholder Image" /></a>
+        <img src="../images/TL_WB_Banner.jpg" align="middle" alt="Placeholder Image" />
     </div>
 
     <div>
@@ -173,7 +231,7 @@
 
                 <div class="panel-group medium-3" id="accordion">
 
-                    <div class="panel panel-default Energy">
+                    <div class="Menu panel panel-default Energy">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
@@ -189,7 +247,7 @@
 
                                 <div class="panel-group" id="nested1">
 
-                                    <div class="panel panel-default Wind_Energy">
+                                    <div class="Menu panel panel-default Wind_Energy">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested1" href="#nested1-collapseOne">
@@ -199,21 +257,21 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested1-collapseOne" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-KHS Wind Turbine</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value = "City_Smart:Kodiak_Substations">
+                                                            <input class="placemarkLayer" type="checkbox" value = "KHS_Turbine" >
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-KEA Wind Turbine</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:Kodiak_Substations">
+                                                            <input class="placemarkLayer" type="checkbox" value = "KEA_Turbine" >
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -222,7 +280,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Energy_Distribution">
+                                    <div class="Menu panel panel-default Energy_Distribution">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested1" href="#nested1-collapseTwo">
@@ -232,101 +290,101 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested1-collapseTwo" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Grid Map</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:KEAGridMap_Layer">
+                                                            <input class="wmsLayer" type="checkbox" value="City_Smart:KEAGridMap_Layer">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Overhead Cables and Poles</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value= "City_Smart:OHC_3,City_Smart:Overhead_Transformers,City_Smart:OHC_1,City_Smart:OHC_2,City_Smart:OHC_M" >
+                                                            <input class="wmsLayer" type="checkbox" value= "City_Smart:OHC_3,City_Smart:Overhead_Transformers,City_Smart:OHC_1,City_Smart:OHC_2,City_Smart:OHC_M" >
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Underground Cables</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:UGC_1,City_Smart:UGC_2,City_Smart:UGC_3">
+                                                            <input class="wmsLayer" type="checkbox" value="City_Smart:UGC_1,City_Smart:UGC_2,City_Smart:UGC_3">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Terror Lake Powerhouse Transmission Lines</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:Wire_Transmission_Kodiak">
+                                                            <input class="wmsLayer" type="checkbox" value="City_Smart:Wire_Transmission_Kodiak">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Large Transformers</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:Kodiak_Large_Transformers">
+                                                            <input class="wmsLayer" type="checkbox" value="City_Smart:Kodiak_Large_Transformers">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Small Transformers</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:Kodiak_Small_Transformers">
+                                                            <input class="wmsLayer" type="checkbox" value="City_Smart:Kodiak_Small_Transformers">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Substations</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right"  type="checkbox" value="City_Smart:Airport_Substation,City_Smart:Kodiak_Substations,City_Smart:K_Subs">
+                                                            <input class="wmsLayer"  type="checkbox" value="City_Smart:Airport_Substation,City_Smart:Kodiak_Substations,City_Smart:K_Subs">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Fuses</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:Kodiak_Substations">
+                                                            <input class="wmsLayer" type="checkbox" value="City_Smart:Kodiak_Substations">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Poles With Guy Cable Support</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:FUSE_line_Kodiak">
+                                                            <input class="wmsLayer" type="checkbox" value="City_Smart:FUSE_line_Kodiak">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="NY">
+                                                <div class="Menu NY">
                                                     <h5>
-                                                        <a>-Fei Tian Academy Energy Grid</a>
+                                                        <a>-Northern Academy Energy Grid</a>
                                                         <label class="switch right">
-                                                            <input class="switch_right" type="checkbox" value="City_Smart:power,City_Smart:power2">
+                                                            <input class="wmsLayer" type="checkbox" value="City_Smart:power,City_Smart:power2">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -336,7 +394,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Energy_Budgets">
+                                    <div class="Menu panel panel-default Energy_Budgets">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested1" href="#nested1-collapseThree">
@@ -346,11 +404,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested1-collapseThree" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Tuluksak Energy Budget</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "AWB_Tuluksak_Project_Site" >
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -359,7 +417,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Energy_Offices">
+                                    <div class="Menu panel panel-default Energy_Offices">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested1" href="#nested1-collapseFour">
@@ -369,7 +427,7 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested1-collapseFour" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Main KEA Building</a>
                                                         <label class="switch right">
@@ -382,7 +440,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div>
 
-                                    <div class="panel panel-default Hydroelectric_Energy">
+                                    <div class="Menu panel panel-default Hydroelectric_Energy">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested1" href="#nested1-collapseFive">
@@ -392,7 +450,7 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested1-collapseFive" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Terror Lake Dam</a>
                                                         <label class="switch right">
@@ -415,7 +473,7 @@
                         </div><!--/.panel-collapse -->
                     </div>
 
-                    <div class="panel panel-default Water">
+                    <div class="Menu panel panel-default Water">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -431,7 +489,7 @@
 
                                 <div class="panel-group" id="nested2">
 
-                                    <div class="panel panel-default Canneries">
+                                    <div class="Menu panel panel-default Canneries">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested2" href="#nested2-collapseOne">
@@ -441,31 +499,31 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested2-collapseOne" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak's Alaska Pacific Seafoods</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox" class="switch_right" value = "Polygon_WMS_Kodiak_Trident">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Alaska_Pacific_Seafoods">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak's International Seafoods of Alaska</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_International_Seafoods_of_Alaska">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak's Ocean Beauty Seafoods</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Ocean_Beauty_Seafoods">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -475,7 +533,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default  Drainage_Systems">
+                                    <div class="Menu panel panel-default  Drainage_Systems">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested2" href="#nested2-collapseTwo">
@@ -485,11 +543,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested2-collapseTwo" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Base and Airport Drainage System</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox" class= "switch_right" value = "City_Smart:MANHOLE_line,City_Smart:MANHOLE_polygon">
+                                                            <input type="checkbox" class= "wmsLayer" value = "City_Smart:MANHOLE_line,City_Smart:MANHOLE_polygon">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -498,7 +556,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default  Water_Quality_Tests">
+                                    <div class="Menu panel panel-default  Water_Quality_Tests">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested2" href="#nested2-collapseThree">
@@ -508,11 +566,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested2-collapseThree" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="NY">
+                                                <div class="Menu NY">
                                                     <h5>
                                                         <a>-FTAA Water Tests</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = placemarkLayer type="checkbox" value = >
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -521,7 +579,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default  Water_Grids">
+                                    <div class="Menu panel panel-default  Water_Grids">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested2" href="#nested2-collapseFour">
@@ -531,11 +589,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested2-collapseFour" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="NY">
+                                                <div class="Menu NY">
                                                     <h5>
                                                         <a>-FTAA Water Grid</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox" class = "switch_right" value = "City_Smart:water2c_FTAA,City_Smart:water3_FTAA,City_Smart:water1c_FTAA,City_Smart:water2_FTAA,City_Smart:water3c_FTAA,City_Smart:water1_FTAA">
+                                                            <input type="checkbox" class = "wmsLayer" value = "City_Smart:water2c_FTAA,City_Smart:water3_FTAA,City_Smart:water1c_FTAA,City_Smart:water2_FTAA,City_Smart:water3c_FTAA,City_Smart:water1_FTAA">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -554,7 +612,7 @@
                         </div><!--/.panel-collapse -->
                     </div>
 
-                    <div class="panel panel-default Agriculture">
+                    <div class="Menu panel panel-default Agriculture">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
@@ -570,7 +628,7 @@
 
                                 <div class="panel-group" id="nested3">
 
-                                    <div class="panel panel-default Soil_Testing">
+                                    <div class="Menu panel panel-default Soil_Testing">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested3" href="#nested3-collapseOne">
@@ -580,11 +638,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested3-collapseOne" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Bear Valley Golf Course</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Bear_Valley_Golf_Course">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -603,7 +661,7 @@
                         </div><!--/.panel-collapse -->
                     </div>
 
-                    <div class="panel panel-default Transportation">
+                    <div class="Menu panel panel-default Transportation">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
@@ -619,7 +677,7 @@
 
                                 <div class="panel-group" id="nested4">
 
-                                    <div class="panel panel-default Airports">
+                                    <div class="Menu panel panel-default Airports">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested4" href="#nested4-collapseOne">
@@ -629,21 +687,21 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested4-collapseOne" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Benny Benson State Airport</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Benny_Benson_State_Airport">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Municipal Airport</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Municipal_Airport">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -652,7 +710,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Rental_Cars">
+                                    <div class="Menu panel panel-default Rental_Cars">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested4" href="#nested4-collapseTwo">
@@ -662,11 +720,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested4-collapseTwo" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Budget Rent-a-Car</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type ="checkbox" value = "Kodiak_Budget_Rent_A_Car">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -675,7 +733,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Harbors">
+                                    <div class="Menu panel panel-default Harbors">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested4" href="#nested4-collapseThree">
@@ -685,22 +743,22 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested4-collapseThree" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-St.Paul Harbor</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_St_Paul_Harbor">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-St.Herman Harbor</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_St_Herman_Harbor">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -709,7 +767,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Piers">
+                                    <div class="Menu panel panel-default Piers">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested4" href="#nested4-collapseFour">
@@ -719,21 +777,21 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested4-collapseFour" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
-                                                        <a>-Kodiak's Pier One</a>
+                                                        <a>-Kodiak Pier One</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Pier_One" >
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
-                                                        <a>-Kodiak's Pier Two</a>
+                                                        <a>-Kodiak Pier Two</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Pier_Two">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -742,7 +800,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div>
 
-                                    <div class="panel panel-default Roads">
+                                    <div class="Menu panel panel-default Roads">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested4" href="#nested4-collapseFive">
@@ -752,7 +810,7 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested4-collapseFive" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Base and Airport Roads</a>
                                                         <label class="switch right">
@@ -762,7 +820,7 @@
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Road System</a>
                                                         <label class="switch right">
@@ -785,7 +843,7 @@
                         </div><!--/.panel-collapse -->
                     </div>
 
-                    <div class="panel panel-default Economics">
+                    <div class="Menu panel panel-default Economics">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
@@ -801,7 +859,7 @@
 
                                 <div class="panel-group" id="nested5">
 
-                                    <div class="panel panel-default Property">
+                                    <div class="Menu panel panel-default Property">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested5" href="#nested5-collapseOne">
@@ -811,7 +869,7 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested5-collapseOne" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Parcel Map</a>
                                                         <label class="switch right">
@@ -825,7 +883,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Banks">
+                                    <div class="Menu panel panel-default Banks">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested5" href="#nested5-collapseTwo">
@@ -835,41 +893,41 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested5-collapseTwo" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Wells Fargo</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value ="Kodiak_Wells_Fargo">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
-                                                        <a>-Kodiak First National</a>
+                                                        <a>-Kodiak First National Bank</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_First_National">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Key Bank</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Key_Bank">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Credit Union</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Credit_Union">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -878,7 +936,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Postal_Services">
+                                    <div class="Menu panel panel-default Postal_Services">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested5" href="#nested5-collapseThree">
@@ -888,11 +946,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested5-collapseThree" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Post Office</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Post_Office">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -911,7 +969,7 @@
                         </div><!--/.panel-collapse -->
                     </div>
 
-                    <div class="panel panel-default  Health_Services">
+                    <div class="Menu panel panel-default  Health_Services">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
@@ -927,7 +985,7 @@
 
                                 <div class="panel-group" id="nested6">
 
-                                    <div class="panel panel-default Hospital_and_Clinics">
+                                    <div class="Menu panel panel-default Hospital_and_Clinics">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested6" href="#nested6-collapseOne">
@@ -937,31 +995,31 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested6-collapseOne" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Providence Kodiak Island Medical Center</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Island_Providence_Medical_Center">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-KIMA</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_KIMA">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Care Clinic</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Care_Clinic">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -970,7 +1028,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Health_Centers">
+                                    <div class="Menu panel panel-default Health_Centers">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested6" href="#nested6-collapseTwo">
@@ -980,21 +1038,21 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested6-collapseTwo" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Public Health Center</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Public_Health_Center">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Mill Bay Health Center</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Mill_Bay_Health_Center">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1003,7 +1061,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Veterinary_Services">
+                                    <div class="Menu panel panel-default Veterinary_Services">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested6" href="#nested6-collapseThree">
@@ -1013,11 +1071,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested6-collapseThree" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Veterinary Clinic</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Veterinary_Clinic">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1026,7 +1084,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Eye_Care">
+                                    <div class="Menu panel panel-default Eye_Care">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested6" href="#nested6-collapseFour">
@@ -1036,21 +1094,21 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested6-collapseFour" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Vision Clinic</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = placemarkLayer" type="checkbox" value = "Kodiak_Vision_Clinic">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Vision Source</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Vision_Source_Eyecare_Excellence">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1069,7 +1127,7 @@
                         </div><!--/.panel-collapse -->
                     </div>
 
-                    <div class="panel panel-default  Risk_Management">
+                    <div class="Menu panel panel-default  Risk_Management">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
@@ -1085,7 +1143,7 @@
 
                                 <div class="panel-group" id="nested7">
 
-                                    <div class="panel panel-default Fire_Stations">
+                                    <div class="Menu panel panel-default Fire_Stations">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested7" href="#nested7-collapseOne">
@@ -1095,31 +1153,31 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested7-collapseOne" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak City Fire Department</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_City_Fire_Department">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Bayside Volunteer Fire Department</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Bayside_Volunteer_Fire_Department">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Base Fire Department</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Base_Fire_Department">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1128,7 +1186,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Police_Stations">
+                                    <div class="Menu panel panel-default Police_Stations">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested7" href="#nested7-collapseTwo">
@@ -1138,11 +1196,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested7-collapseTwo" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Police Department</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Police_Department">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1151,7 +1209,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default ESP_System">
+                                    <div class="Menu panel panel-default ESP_System">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested7" href="#nested7-collapseThree">
@@ -1161,7 +1219,7 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested7-collapseThree" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-ESP Sensors</a>
                                                         <label class="switch right">
@@ -1184,7 +1242,7 @@
                         </div><!--/.panel-body -->
                     </div>
 
-                    <div class="panel panel-default Education">
+                    <div class="Menu panel panel-default Education">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
@@ -1200,7 +1258,7 @@
 
                                 <div class="panel-group" id="nested8">
 
-                                    <div class="panel panel-default A_World_Bridge_Sites">
+                                    <div class="Menu panel panel-default A_World_Bridge_Sites">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseOne">
@@ -1210,11 +1268,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseOne" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="NY">
+                                                <div class="Menu NY">
                                                     <h5>
                                                         <a>-USA A World Bridge</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "A_World_Bridge">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1223,7 +1281,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default UNESCO_WHS">
+                                    <div class="Menu panel panel-default UNESCO_WHS">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseTwo">
@@ -1233,7 +1291,7 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseTwo" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="NY">
+                                                <div class="Menu NY">
                                                     <h5>
                                                         <a>-Fei Tian UNESCO Prototype</a>
                                                         <label class="switch right">
@@ -1246,7 +1304,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Academies">
+                                    <div class="Menu panel panel-default Academies">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseThree">
@@ -1256,11 +1314,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseThree" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="NY">
+                                                <div class="Menu NY">
                                                     <h5>
-                                                        <a>-Fei Tian Academy of the Arts</a>
+                                                        <a>-Northern Academy of the Arts</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "AWB_Middletown_Project_Site">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1269,7 +1327,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div><!-- /.panel -->
 
-                                    <div class="panel panel-default Higher_Education">
+                                    <div class="Menu panel panel-default Higher_Education">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseFour">
@@ -1279,7 +1337,7 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseFour" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="NY">
+                                                <div class="Menu NY">
                                                     <h5>
                                                         <a>-Fei Tian College</a>
                                                         <label class="switch right">
@@ -1289,11 +1347,11 @@
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Community College</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Community_College">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1302,7 +1360,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div>
 
-                                    <div class="panel panel-default Museums">
+                                    <div class="Menu panel panel-default Museums">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseFive">
@@ -1312,21 +1370,21 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseFive" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Alutiq Museum</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Alutiq_Museum">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
-                                                        <a>-baranov Museum</a>
+                                                        <a>-Baranov Museum</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Baranov_Museum">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1335,7 +1393,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div>
 
-                                    <div class="panel panel-default Libraries">
+                                    <div class="Menu panel panel-default Libraries">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseSix">
@@ -1345,11 +1403,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseSix" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
-                                                        <a>-Kodiak Community Libarary</a>
+                                                        <a>-Kodiak Community Library</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Public_Library">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1358,7 +1416,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div>
 
-                                    <div class="panel panel-default Elementary_School ">
+                                    <div class="Menu panel panel-default Elementary_School ">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseSeven">
@@ -1368,41 +1426,41 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseSeven" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-North Star Elementary</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_North_Star_Elementary">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Main Elementary</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Main_Elementary">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-East Elementary</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_East_Elementary">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
                                                 </div>
 
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Peterson Elementary</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Peterson_Elementary">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1411,7 +1469,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div>
 
-                                    <div class="panel panel-default Middle_School">
+                                    <div class="Menu panel panel-default Middle_School">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseEight">
@@ -1421,11 +1479,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseEight" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak Middle School</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_Middle_School">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1434,7 +1492,7 @@
                                         </div><!--/.panel-collapse -->
                                     </div>
 
-                                    <div class="panel panel-default High_School">
+                                    <div class="Menu panel panel-default High_School">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#nested8" href="#nested8-collapseNine">
@@ -1444,11 +1502,11 @@
                                         </div><!--/.panel-heading -->
                                         <div id="nested8-collapseNine" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <div class="AK">
+                                                <div class="Menu AK">
                                                     <h5>
                                                         <a>-Kodiak High School</a>
                                                         <label class="switch right">
-                                                            <input type="checkbox">
+                                                            <input class = "placemarkLayer" type="checkbox" value = "Kodiak_High_School">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </h5>
@@ -1477,8 +1535,27 @@
         <canvas id="canvasOne" width="1000" height="1000" style="width: 100%; height: auto;">
             Your browser does not support HTML5 Canvas.
         </canvas>
+        <div class="popup-group" id="popupBox">
+        <div class="popupBoxWrapper">
+            <div class="popupBoxContent">
+                <!-- Popup Box Header-->
+                <div class="popup-Header">
+                    <span class="close" id="closeIt">&times;</span>
+                </div>
+                <!-- Popup Box Body-->
+                <div class="popup-Body" id="popupBody">
+                </div>
+                <!-- Popup Box Footer-->
+                <div class="popup-Footer">
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
+ </div>
+</div>
+</div>
 </div>
 </div>
 </body>
