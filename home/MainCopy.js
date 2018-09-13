@@ -74,9 +74,80 @@ requirejs(['./WorldWindShim',
 
         var layers = globe.layers;
 
+        // var images = [
+        //     "AWB.png",
+        //     "Kodiak_Pacific_Seafood.jpg",
+        //     "Bayside_Volunteer_Fire_Department.jpg" ,
+        //     "Bayside_Volunteer_Fire_Department_Testing_Area.jpg",
+        //     "BVGC.jpeg",
+        //     "East_Elementary.jpg",
+        //     "FEITIAN.jpeg",
+        //     "Fort_Abercrombie.jpg",
+        //     "KEA_Turbine.jpg",
+        //     "KHS_Turbine.jpg",
+        //     "KIBSD.jpeg",
+        //     "Kodiak_Alutiq_Musuem.jpg",
+        //     "Kodiak_Baranov_Museum.jpg",
+        //     "Kodiak_Base_Fire_Department.jpg",
+        //     "Kodiak_Benny_Benson_State_Airport.jpg",
+        //     "Kodiak_Budget_Rent_A_Car.jpg",
+        //     "Kodiak_Care_Clinic.jpg",
+        //     "Kodiak_Christian_School.jpg",
+        //     "Kodiak_City_Fire_Department.jpg",
+        //     "Kodiak_College_Campus_Center.jpg",
+        //     "Kodiak_Community_Health_Center.jpg",
+        //     "Kodiak_Credit_Union.jpg",
+        //     "Kodiak_First_National.jpg",
+        //     "Kodiak_Fisheries_Research_Center.jpg",
+        //     "Kodiak_High_School.jpg",
+        //     "Kodiak_ISA.jpg",
+        //     "Kodiak_Island_Providence_Medical_Center.jpg",
+        //     "Kodiak_KANA_Hospital.jpg",
+        //     "Kodiak_KEA_Office.jpg",
+        //     "Kodiak_Key_Bank.jpg",
+        //     "Kodiak_Main_Elementary.jpg",
+        //     "Kodiak_Middle_School.jpg",
+        //     "Kodiak_Mill_Bay_Health_Center.jpg",
+        //     "Kodiak_Municipal_Airport.jpg",
+        //     "Kodiak_North_Star_Elementary.jpg",
+        //     "Kodiak_Ocean_Beauty_Seafoods.jpg",
+        //     "Kodiak_Peterson_Elementary.jpg",
+        //     "Kodiak_Pier_One.jpg",
+        //     "Kodiak_Pier_Two.jpg",
+        //     "Kodiak_Police_Department.jpg",
+        //     "Kodiak_Providence_Chiniak_Elder_House.jpg",
+        //     "Kodiak_Island_Providence_Medical_Center.jpg",
+        //     "Kodiak_Public_Health_Center.jpg",
+        //     "Kodiak_Public_Library.jpg",
+        //     "Kodiak_St_Herman_Harbor.jpg",
+        //     "Kodiak_St_Paul_Harbor.jpg",
+        //     "Kodiak_Veterinary_Clinic.jpg",
+        //     "Kodiak_Vision_Clinic.jpg",
+        //     "Kodiak_Vision_Source_Eyecare_Excellence.jpg",
+        //     "Kodiak_Wells_Fargo.png",
+        //     "MINISAT.jpeg"
+        //
+        // ];
 
         // var reqData = "'Latitude_and_Longitude_Decimal = "0,0"'"
-        // Latitude_Longitude_and_Decimal = "value"
+        // // Latitude_Longitude_and_Decimal = "value"
+
+        // $.ajax({
+        //     url: 'http://localhost:3005/66',
+        //     data: data,
+        //     dataType: 'json',
+        //     success: function(result) {
+        //         console.log(result);
+        //         $.get('LayerNCC', function(data) {
+        //             $('.result').html(data);
+        //                 alert("Load was performed.");
+        //
+        //         }
+        //    )}
+        // });
+
+
+
 
 
 
@@ -95,63 +166,34 @@ requirejs(['./WorldWindShim',
         var infobox;
 
         $(document).ready(function () {
-            $.ajax({
-                url: 'http://localhost:3005/66',
-                dataType: 'json',
-                success: function(result) {
-                    if (!result.err) {
-                        console.log(result.data);
-                        infobox = result.data;
-                        for (var k = 0; k < infobox.length; k++) {
-                            // alert (data[0].Color);
+            $.getJSON('LayerNCC.json', function(pmInfo){
+                infobox = pmInfo;
+                console.log(pmInfo.length);
+                for (var k = 0; k < pmInfo.length; k++) {
 
-                            var colorAttribute = infobox[k].Color;
-                            var cAtwo = colorAttribute.split(" ");
-                            // console.log(cAtwo);
+                    // alert (data[0].Color);
 
-                            var location = infobox[k].Latitude_and_Longitude_Decimal;
-                            var ptwo = location.split(",");
+                    var colorAttribute = pmInfo[k].Color;
+                    var cAtwo = colorAttribute.split(" ");
+                    // console.log(cAtwo);
 
-                            // console.log(ptwo);
+                    var location = pmInfo[k].Latitude_and_Longitude_Decimal;
+                    var ptwo = location.split(",");
 
-                            var LayerName = infobox[k].Layer_Name;
-                            // console.log(LayerName);
+                    // console.log(ptwo);
+
+                    var LayerName = pmInfo[k].Layer_Name;
+                    // console.log(LayerName);
 
 
-                            console.log(location);
-                            Placemark_Creation(cAtwo, ptwo, LayerName);
-                        }
-                    }
+                    console.log(location);
+                    Placemark_Creation(cAtwo, ptwo, LayerName);
+
 
                 }
-            });
 
-            // $.getJSON('LayerNCC.json', function(pmInfo){
-            //     infobox = pmInfo;
-            //     console.log(pmInfo.length);
-            //     for (var k = 0; k < pmInfo.length; k++) {
-            //
-            //         // alert (data[0].Color);
-            //
-            //         var colorAttribute = pmInfo[k].Color;
-            //         var cAtwo = colorAttribute.split(" ");
-            //         // console.log(cAtwo);
-            //
-            //         var location = pmInfo[k].Latitude_and_Longitude_Decimal;
-            //         var ptwo = location.split(",");
-            //
-            //         // console.log(ptwo);
-            //
-            //         var LayerName = pmInfo[k].Layer_Name;
-            //         // console.log(LayerName);
-            //
-            //
-            //         console.log(location);
-            //         Placemark_Creation(cAtwo, ptwo, LayerName);
-            //
-            //
-            //     }
-            // });
+
+            });
 
             $(".wmsLayer").each(function (i) {
                 preloadLayer[i] = $(this).val();
@@ -162,7 +204,7 @@ requirejs(['./WorldWindShim',
             layerName = strs.split(",");
 
             $('.wmsLayer').click(function(){
-                // console.log (layers);
+                console.log (layers);
                 for (var a = 0; a < layers.length; a++) {
                     if ($('.wmsLayer').is(":checkbox:checked")) {
                         $(':checkbox:checked').each(function () {
@@ -192,8 +234,8 @@ requirejs(['./WorldWindShim',
                         val1 = $(this).val();
                         // var str = val+'';
                         // val = str.split(",");
-                        // console.log(val1);
-                        // console.log(layers);
+                        console.log(val1);
+                        console.log(layers);
 
                         for (var a = 0; a < layers.length; a++) {
 
@@ -233,7 +275,7 @@ requirejs(['./WorldWindShim',
         });
 
         var createWMSLayer = function (xmlDom) {
-            // console.log (layerName);
+            console.log (layerName);
 
             // Create a WmsCapabilities object from the XML DOM
             var wms = new WorldWind.WmsCapabilities(xmlDom);
@@ -243,7 +285,7 @@ requirejs(['./WorldWindShim',
                 // wmsLayerCapabilities.title = layerName[n];
                 // Form a configuration object from the WmsLayerCapability object
                 var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
-                // console.log(n + "Layer: " + layerName[n]);
+                console.log(n + "Layer: " + layerName[n]);
                 // // Modify the configuration objects title property to a more user friendly title
                 // // wmsConfig.title = layerName[n];
                 // // Create the WMS Layer from the configuration object
@@ -256,7 +298,7 @@ requirejs(['./WorldWindShim',
 
         // Called if an error occurs during WMS Capabilities document retrieval
         var logError = function (jqXhr, text, exception) {
-            // console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
+            console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
         };
 
         $.get(serviceAddress).done(createWMSLayer).fail(logError);
@@ -274,12 +316,12 @@ requirejs(['./WorldWindShim',
 
             var canvas = document.createElement("canvas"),
                 ctx2d = canvas.getContext("2d"),
-                size = 45, c = size / 2, innerRadius = 5, outerRadius = 15;
+                size = 45, c = size / 2 - 0.5, innerRadius = 3, outerRadius = 10;
 
             canvas.width = size;
             canvas.height = size;
 //This is the color of the placeholder and appearance (Most likely)
-//             console.log(RGB);
+            console.log(RGB);
 
             var gradient = ctx2d.createRadialGradient(c, c, innerRadius, c, c, outerRadius);
             gradient.addColorStop(0, RGB[0]);
@@ -322,7 +364,7 @@ requirejs(['./WorldWindShim',
             highlightAttributes.imageScale = 1.2;
             placemark.highlightAttributes = highlightAttributes;
 
-            // console.log(placemark);
+            console.log(placemark);
 
             // Add the placemark to the layer.
             placemarkLayer.addRenderable(placemark);
@@ -370,7 +412,7 @@ requirejs(['./WorldWindShim',
                     // Applications might use this information to determine whether the user wants to edit the label
                     // or is merely picking the placemark as a whole.
                     if (pickList.objects[p].labelPicked) {
-                        // console.log("Label picked");
+                        console.log("Label picked");
                     }
                 }
             }
@@ -386,9 +428,9 @@ requirejs(['./WorldWindShim',
             var x = a.clientX,
                 y = a.clientY;
             var pickListCLK = globe.pick(globe.canvasCoordinates(x, y));
-            // console.log(pickListCLK);
+            console.log(pickListCLK);
             for (var m = 0; m < pickListCLK.objects.length; m++) {
-                // console.log (pickListCLK.objects[m].position.latitude);
+                console.log (pickListCLK.objects[m].position.latitude);
                 var pickedPM = pickListCLK.objects[m].userObject;
                 if (pickedPM instanceof WorldWind.Placemark) {
 
@@ -424,23 +466,23 @@ requirejs(['./WorldWindShim',
             var sitePopUp = function (latitude, longitude) {
                 var popupBodyItem = $("#popupBody");
                 var c = latitude + "," + longitude;
-                // console.log(c);
+                console.log(c);
 
-                // console.log(infobox);
+                console.log(infobox);
 
 
                 for (var k = 0, lengths = infobox.length; k < lengths; k++) {
                     // alert("popup info");
 
                     if (infobox[k].Latitude_and_Longitude_Decimal === c) {
-                        // console.log("good-bye");
+                        console.log("good-bye");
                         popupBodyItem.children().remove();
                         // alert(infobox[k].sitename);
                         //     alert("hi");
 
                         var popupBodyName = $('<p class="site-name"><h4>' + infobox[k].Site_Name + '</h4></p>');
                         var popupBodyDesc = $('<p class="site-description">' + infobox[k].Site_Description + '</p><br>');
-                        var fillerImages = $('<img style="width:100%; height:110%;" src="../images/Pics/' + infobox[k].Picture_Location + '"/>');
+                        var fillerImages = $('<img style="width:300px; height:400px;" src="../images/Pics/' + infobox[k].Picture_Location + '"/>');
                         var imageLinks = $('<h6><strong><a href="' + infobox[k].Link_to_site_location + '">Website Link </a></strong></h6>');
 
                         popupBodyItem.append(popupBodyName);
