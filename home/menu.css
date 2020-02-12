@@ -195,3 +195,38 @@ input:checked + .slider:before
     display: block;
   }
 }
+
+#image {
+  width: 400px;
+  height: auto;
+  text-align: left;
+}
+
+#menu {
+  border-style: solid;
+}
+
+#compare {
+  border-style: solid;
+}
+
+#title {
+  border-style: solid;
+  font-size: 40px;
+  /*margin-right: 800px;*/
+  text-align: center;
+  /*bottom: 100px;*/
+  /*left: 100px;*/
+  width: 400px;
+  height: auto;
+}
+
+#graphs {
+  left: 488px;
+  border-style: solid;
+}
+
+#info {
+  left: 487px;
+  border-style: solid;
+}

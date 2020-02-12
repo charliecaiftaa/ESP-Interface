@@ -17,105 +17,30 @@
 <body>
 
 <div class="container">
+    <p class="header" id="title">QuakeFinder</p>
     <div>
-        <img src="./TL_WB_Banner.jpg" align="middle" alt="Placeholder Image" />
+
+        <img src="./TL_WB_Banner.jpg" alt="Placeholder Image" id="image"/>
+
     </div>
 
     <div>
         <!-- Menu -->
         <ul class="nav navbar-nav">
-            <li class="dropdown"><a href="#" title="Energy Production" class="dropdown-toggle disabled" data-toggle="dropdown">Energy Production</a>
+            <li class="dropdown" id="menu"><a href="#" title="Energy Production" class="dropdown-toggle disabled" data-toggle="dropdown">Menu</a>
 
             </li>
-            <li class="dropdown"><a href="#" title="Energy Production" class="dropdown-toggle disabled" data-toggle="dropdown">Economics</a>
+            <li id="compare"><a href="#" title="Energy Production" class="dropdown-toggle disabled" data-toggle="dropdown">Compare</a>
 
-            <li class="dropdown"><a href="#" title="Financials" class="dropdown-toggle disabled" data-toggle="dropdown">Financials</a>
-
-            </li>
-            <li class="dropdown"><a href="#" title="Presentations" class="dropdown-toggle disabled" data-toggle="dropdown">Presentations</a>
+            <li class="dropdown" id="graphs"><a href="#" title="Presentations" class="dropdown-toggle disabled" data-toggle="dropdown">Graphs</a>
 
             </li>
-            <li class="dropdown"><a href="#" title="TechInfo" class="dropdown-toggle disabled" data-toggle="dropdown">Technical Info</a>
+            <li class="dropdown" id="info"><a href="#" title="TechInfo" class="dropdown-toggle disabled" data-toggle="dropdown">Info</a>
 
             </li>
         </ul>
     </div>
 
-    <div class="row">
-
-        <div class="col-sm-3">
-            <br>
-            <h4>Menu</h4>
-            <div class="container">
-
-                <div class="panel-group medium-3" id="accordion">
-
-                    <div class="Menu panel panel-default Energy">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                    Energy
-                                </a>
-                            </h4>
-                        </div><!--/.panel-heading -->
-                        <div id="collapseOne" class="panel-collapse collapse">
-                            <div class="panel-body">
-
-                                <!-- nested -->
-
-
-                                <div class="panel-group" id="nested1">
-
-                                    <div class="Menu panel panel-default Wind_Energy">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#nested1" href="#nested1-collapseOne">
-                                                    Wind Energy
-                                                </a>
-                                            </h4>
-                                        </div><!--/.panel-heading -->
-                                        <div id="nested1-collapseOne" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <div class="Menu AK">
-                                                    <h5>
-                                                        <a>-KHS Wind Turbine</a>
-                                                        <label class="switch right">
-                                                            <input class="placemarkLayer" type="checkbox" value = "KHS_Turbine" >
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </h5>
-                                                </div>
-
-                                                <div class="Menu AK">
-                                                    <h5>
-                                                        <a>-KEA Wind Turbine</a>
-                                                        <label class="switch right">
-                                                            <input class="placemarkLayer" type="checkbox" value = "KEA_Turbine" >
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div><!--/.panel-collapse -->
-                                    </div><!-- /.panel -->
-
-                                </div><!-- /.panel-group -->
-
-
-                                <!-- nested -->
-
-
-                            </div><!--/.panel-body -->
-                        </div><!--/.panel-collapse -->
-                    </div>
-
-                    <!--/.panel-collapse -->
-                     <!-- /.panel-group -->
-        </div>
-
-                </div><!-- /.panel-group -->
-
-        </div>
 
     <div class="col-sm-9" id="globe">
         <canvas id="canvasOne" width="1000" height="1000" style="width: 100%; height: auto;">
