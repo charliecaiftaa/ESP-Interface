@@ -197,9 +197,10 @@ input:checked + .slider:before
 }
 
 #image {
-  width: 400px;
+  width: 300px;
   height: auto;
   text-align: left;
+  right: 100px;
 }
 
 #menu {
@@ -213,12 +214,14 @@ input:checked + .slider:before
 #title {
   border-style: solid;
   font-size: 40px;
-  /*margin-right: 800px;*/
+  margin-left: 400px;
+  margin-bottom: 100px;
   text-align: center;
-  /*bottom: 100px;*/
+  bottom: 100px;
   /*left: 100px;*/
-  width: 400px;
-  height: auto;
+  /*width: 400px;*/
+  /*height: auto;*/
+  /*!*position: relative;*!*/
 }
 
 #graphs {
@@ -230,3 +233,9 @@ input:checked + .slider:before
   left: 487px;
   border-style: solid;
 }
+
+.header {
+  border-style: solid;
+  display: inline;
+}
+
