@@ -67,7 +67,7 @@ requirejs(['./WorldWindShim',
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
         // Web Map Service information from NASA's Near Earth Observations WMS
-        var serviceAddress = "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1";
+        // var serviceAddress = "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1";
 
         var layerName = [];
         var preloadLayer = [];
@@ -259,7 +259,7 @@ requirejs(['./WorldWindShim',
             // console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
         };
 
-        $.get(serviceAddress).done(createWMSLayer).fail(logError);
+        // $.get(serviceAddress).done(createWMSLayer).fail(logError);
 
         var Placemark_Creation = function (RGB, latandlong, LayerName) {
 
