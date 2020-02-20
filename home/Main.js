@@ -74,6 +74,72 @@ requirejs(['./WorldWindShim',
 
         var layers = globe.layers;
 
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        };
+
+        myFunction();
+
+        $('.switch_right').click(function() {
+            var CurrentToggleVal = $(this).val();
+            console.log("Initial:" + layers.length);
+
+            for (var b = 0; b < layers.length; b++) {
+                if (layers[b].displayName === CurrentToggleVal) {
+
+                    if ($(this).prop('checked')) {
+                        console.log("open");
+                        layers[b].enabled = true;
+
+
+                    } else {
+                        console.log("closed");
+                        layers[b].enabled = false;
+
+                    }
+                    break;
+
+                } else {
+                    if (b === layers.length - 1) {
+                        console.log("new");
+
+                        $.getJSON("LayerNCC.json", function (layer) {
+                            for (var j = 0; j < layer.length; j++) {
+
+                                if (CurrentToggleVal === layer[j].Layer_Name) {
+                                    LayerInfo.push(layer[j]);
+                                    let loca = layer[j].Latitude_and_Longitude_Decimal;
+                                    listLoca.push(loca);
+                                    let locat = loca.split(",");
+                                    let col = layer[j].Color;
+                                    let colo = col.split(" ");
+                                    let laname = layer[j].Layer_Name;
+                                    Placemark_Creation(colo, locat, laname);
+                                    console.log("Ending Loop:" + layers.length);
+                                    // console.log ("displayN last: " + layers[layers.length-1].displayName);
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
 
         // var reqData = "'Latitude_and_Longitude_Decimal = "0,0"'"
         // Latitude_Longitude_and_Decimal = "value"
