@@ -62,39 +62,36 @@ requirejs(['./WorldWindShim',
         // }
 
         // Create a layer manager for controlling layer visibility.
-        var layerManager = new LayerManager(globe);
+        let layerManager = new LayerManager(globe);
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
         // Web Map Service information from NASA's Near Earth Observations WMS
         // var serviceAddress = "http://cs.aworldbridgelabs.com:8080/geoserver/ows?service=WMS&request=GetCapabilities&version=1.1.1";
 
-        var layerName = [];
-        var preloadLayer = [];
+        let layerName = [];
+        let preloadLayer = [];
 
-        var layers = globe.layers;
+        let layers = globe.layers;
 
         /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        };
-
-        myFunction();
+        // function myFunction() {
+        //     document.getElementById("myDropdown").classList.toggle("show");
+        // }
+        //
+        // // Close the dropdown if the user clicks outside of it
+        // window.onclick = function(event) {
+        //     if (!event.target.matches('.dropbtn')) {
+        //         var dropdowns = document.getElementsByClassName("dropdown-content");
+        //         for (let i = 0; i < dropdowns.length; i++) {
+        //             let openDropdown = dropdowns[i];
+        //             if (openDropdown.classList.contains('show')) {
+        //                 openDropdown.classList.remove('show');
+        //             }
+        //         }
+        //     }
+        // };
 
         $('.switch_right').click(function() {
             var CurrentToggleVal = $(this).val();
