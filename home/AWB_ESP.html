@@ -10,10 +10,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="menu.css"/>
+<!--    <link rel="stylesheet" href="menu.css"/>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script data-main="Main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+<!--    <script data-main="Main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>-->
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!--JQuery UI-->
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
+    <!--Local Stylesheet-->
+    <link rel="stylesheet" href="./menu.css"/>
+    <!--Perfect Scrollbar CSS-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/css/perfect-scrollbar.min.css"/>
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
     <style>
         .show {display: block;}
     </style>
@@ -22,8 +38,16 @@
 <script>
     /* When the user clicks on the button,
      toggle between hiding and showing the dropdown content */
-    function myFunction() {
-        document.getElementsByClassName("myDropdown").classList.toggle("show");
+    function myMenu() {
+        document.getElementById("mymenu").classList.toggle("show");
+    }
+
+    function myGraphs() {
+        document.getElementById("mygraphs").classList.toggle("show");
+    }
+
+    function myInfo() {
+        document.getElementById("myinfo").classList.toggle("show");
     }
 
     // Close the dropdown if the user clicks outside of it
@@ -48,115 +72,248 @@
 
     </header>
 </div>
-<div class="container">
 
+<!--<div>-->
 
+<!--    <ul class="nav navbar-nav">-->
+<!--        <li class="dropdown" id="menu">&lt;!&ndash;data-toggle="dropdown" class="disabled"&ndash;&gt;-->
+<!--            <a href="#" title="Menu" onclick="myMenu()" class="dropdown-toggle dropbtn" >Menu</a>-->
+<!--            &lt;!&ndash;                <ul id="mymenu" class="dropdown-content">&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <li class="switch_right">Station 1<span class="glyphicon glyphicon-signal"></span><span class="glyphicon glyphicon-info-sign"></span> </li>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <li>Station 2</li>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <li>Station 3</li>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <li>Station 4</li>&ndash;&gt;-->
+<!--            &lt;!&ndash;                </ul>&ndash;&gt;-->
 
+<!--        </li>-->
+<!--        <li id="compare"><a href="#" title="Compare" class="dropdown-toggle disabled" data-toggle="dropdown">Compare</a>-->
 
-    <div>
+<!--        <li class="dropdown" id="graphs">-->
+<!--            <a href="#" title="Graphs" class="dropdown-toggle disabled dropbtn" onclick="myGraphs()">Graphs</a>-->
+<!--            <ul id="mygraphs" class="dropdown-content">-->
+<!--                <li class="switch_right">Station 1<span class="glyphicon glyphicon-signal"></span><span class="glyphicon glyphicon-info-sign"></span> </li>-->
+<!--                <li>Station 2</li>-->
+<!--                <li>Station 3</li>-->
+<!--                <li>Station 4</li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--        <li class="dropdown" id="info">-->
+<!--            <a href="#" title="Info" class="dropdown-toggle disabled dropbtn" onclick="myInfo()">Info</a>-->
+<!--            <ul id="myinfo" class="dropdown-content">-->
+<!--                <li class="switch_right">Station 1<span class="glyphicon glyphicon-signal"></span><span class="glyphicon glyphicon-info-sign"></span> </li>-->
+<!--                <li>Station 2</li>-->
+<!--                <li>Station 3</li>-->
+<!--                <li>Station 4</li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
 
-        <ul class="nav navbar-nav">
-            <li class="dropdown" id="menu"><!--data-toggle="dropdown" class="disabled"-->
-                <a href="#" title="Menu" onclick="myFunction()" class="dropdown-toggle dropbtn" >Menu</a>
-                <ul class="dropdown-content myDropdown">
-                    <li class="switch_right">Station 1<span class="glyphicon glyphicon-signal"></span><span class="glyphicon glyphicon-info-sign"></span> </li>
-                    <li>Station 2</li>
-                    <li>Station 3</li>
-                    <li>Station 4</li>
-                </ul>
+<!--<div class="container">-->
 
-            </li>
-            <li id="compare"><a href="#" title="Compare" class="dropdown-toggle disabled" data-toggle="dropdown">Compare</a>
-
-            <li class="dropdown" id="graphs">
-                <a href="#" title="Graphs" class="dropdown-toggle disabled dropbtn" onclick="myFunction()">Graphs</a>
-                <ul class="dropdown-content myDropdown">
-                    <li class="switch_right">Station 1<span class="glyphicon glyphicon-signal"></span><span class="glyphicon glyphicon-info-sign"></span> </li>
-                    <li>Station 2</li>
-                    <li>Station 3</li>
-                    <li>Station 4</li>
-                </ul>
-            </li>
-            <li class="dropdown" id="info">
-                <a href="#" title="Info" class="dropdown-toggle disabled dropbtn" onclick="myFunction()">Info</a>
-                <ul class="dropdown-content myDropdown">
-                    <li class="switch_right">Station 1<span class="glyphicon glyphicon-signal"></span><span class="glyphicon glyphicon-info-sign"></span> </li>
-                    <li>Station 2</li>
-                    <li>Station 3</li>
-                    <li>Station 4</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-<!--        <h4>Menu</h4>-->
-<!--        <div class="container">-->
-
-<!--            <div class="panel-group medium-3" id="accordion">-->
-
-<!--                <div class="Menu panel panel-default Energy">-->
-<!--                    <div class="panel-heading">-->
-<!--                        <h4 class="panel-title">-->
-<!--                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">-->
-<!--                                Menu-->
-<!--                            </a>-->
-<!--                        </h4>-->
-<!--                    </div>&lt;!&ndash;/.panel-heading &ndash;&gt;-->
-<!--                    <div id="collapseOne" class="panel-collapse collapse">-->
-<!--                        <div class="panel-body">-->
-
-<!--                            &lt;!&ndash; nested &ndash;&gt;-->
-
-
-<!--                            <div class="panel-group" id="nested1">-->
-
-<!--                                <div class="Menu panel panel-default Wind_Energy">-->
-<!--                                    <div class="panel-heading">-->
-<!--                                        <h4 class="panel-title">-->
-<!--                                            <a class="collapsed" data-toggle="collapse" data-parent="#nested1" href="#nested1-collapseOne">-->
-<!--                                                Stations-->
-<!--                                            </a>-->
-<!--                                        </h4>-->
-<!--                                    </div>&lt;!&ndash;/.panel-heading &ndash;&gt;-->
-<!--                                    <div id="nested1-collapseOne" class="panel-collapse collapse">-->
-<!--                                        <div class="panel-body">-->
-<!--                                            <div class="Menu AK">-->
-<!--                                                <h5>-->
-<!--                                                    <a>-Station 1</a>-->
-<!--                                                    <label class="switch right">-->
-<!--                                                        <input class="switch_right myModal" type="checkbox" value = "KHS_Turbine">-->
-<!--                                                        <span class="slider round"></span>-->
-<!--                                                    </label>-->
-<!--                                                </h5>-->
-<!--                                            </div>-->
-
-<!--                                            <div class="Menu AK">-->
-<!--                                                <h5>-->
-<!--                                                    <a>-KEA Wind Turbine</a>-->
-<!--                                                    <label class="switch right">-->
-<!--                                                        <input class="switch_right myModal" type="checkbox" value="KEA_Turbine">-->
-<!--                                                        <span class="slider round"></span>-->
-<!--                                                    </label>-->
-<!--                                                </h5>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>&lt;!&ndash;/.panel-collapse &ndash;&gt;-->
-<!--                                </div>&lt;!&ndash; /.panel &ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+<!--    <div class="col-sm-9" id="globe">-->
+<!--        <canvas id="canvasOne" width="1000" height="1000" style="width: 100%; height: auto;">-->
+<!--            Your browser does not support HTML5 Canvas.-->
+<!--        </canvas>-->
 <!--    </div>-->
 
+<!--    &lt;!&ndash; Add the dropdown menu contents here and follow QuakeHunter's interface design. &ndash;&gt;-->
 
-    <div class="col-sm-9" id="globe">
-        <canvas id="canvasOne" width="1000" height="1000" style="width: 100%; height: auto;">
+<!--</div>-->
+
+<ul class="tab"
+    style="z-index: 999; position: fixed; left: 0; height: 38px; width: 100%; background: rgba(46,74,110,1); overflow: visible">
+    <li>
+        <a class="tablinksLeft" onclick="openTabLeft(event, 'controls')" title="Controls">
+            <span class="glyphicon glyphicon-tasks"></span></a>
+    </li>
+
+    <li>
+        <a href="./compare.html" class="tablinksLeft" id="reset" title="Compare">
+        <span class="glyphicon glyphicon-transfer"></span></a>
+    </li>
+
+    <li>
+        <a class="tablinksRight" onclick="openTabRight(event, 'information');"
+           style="position: fixed; right: 1%; width: 3%;" title="Stats">
+            <i class="fa fa-info" aria-hidden="true"></i></a>
+    </li>
+    <li>
+        <a class="tablinksRight" onclick="openTabRight(event, 'graphs')" style="position: fixed; right: 4%"
+           title="Graphs">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i></a>
+    </li>
+</ul>
+
+<div class="container containerFont">
+    <div class="col-sm-8" id="globe" style="width: 100%; height: 100%; position: fixed; left: 0">
+        <canvas id="canvasOne" width="1920" height="1080" style="position: fixed; left: 0; width: 100%; height: 100%">
             Your browser does not support HTML5 Canvas.
         </canvas>
     </div>
+    <!--<div class="row">-->
+
+    <div id="controls" class="col-sm-2 tabcontentLeft leftTabPadding" style="font-size: 12px !important;">
+        <div class="smallRule">
+            <h4 style="text-align: center ">Search Options:</h4>
+        </div>
+        <h5 style="text-align: center;"><strong>Date Range:</strong></h5>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2 push-md-10">
+                    <h5>From:</h5></div>
+                <div class="col-md-10 pull-md-2">
+                    <input class="form-control" id="fromdatepicker" style="color:#000000; position: relative;
+                     display: block">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2 push-md-10">
+                    <h5>To:</h5></div>
+                <div class="col-md-10 pull-md-2">
+                    <input class="form-control" id="todatepicker" style="color:#000000; position: relative;
+                    display: block">
+                </div>
+            </div>
+        </div>
+        <div class="list-group" id="annotationList" style="width: 100%; text-align: center;">
+            <div class="input-group" id="annotationBox" style="width: 100%;text-align: center;align-content: center;">
+                <div class="smallRule">
+                    <h5><strong>Magnitude Range</strong></h5>
+                    <div id="magSlider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                         style="width: 100%;">
+                        <div class="ui-slider-range ui-widget-header ui-corner-all"
+                             style="left: 61.4286%; width: 38.5714%;"></div>
+                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                              style="left: 75.7143%;"></span>
+                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                              style="left: 100%;"></span>
+                        <div class="ui-slider-range ui-widget-header ui-corner-all"
+                             style="width: 24.2857%; left: 75.7143%;"></div>
+                    </div>
+                    <h5><span id="magSliderValue">5.3 to 7 Richter</span></h5>
+                </div>
+                <div class="smallRule">
+                    <h5><strong>Depth Range</strong></h5>
+                    <div id="depthSlider"
+                         class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                         style="width: 100%;">
+                        <div class="ui-slider-range ui-widget-header ui-corner-all"
+                             style="left: 61.4286%; width: 38.5714%;"></div>
+                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                              style="left: 75.7143%;"></span>
+                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                              style="left: 100%;"></span>
+                        <div class="ui-slider-range ui-widget-header ui-corner-all"
+                             style="width: 24.2857%; left: 75.7143%;"></div>
+                    </div>
+                    <h5><span id="depthSliderValue">0 to 1000 KM</span></h5>
+                </div>
+                <div style="color: #FFFFFF;">
+                    <h5><strong>Surface Opacity</strong></h5>
+                    <div id="opacitySlider"
+                         class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                         style="width: 100%;">
+                    </div>
+                    <h5><span id="opacitySliderValue">% opacity</span></h5>
+                </div>
+            </div>
+            <h5 style="text-align: left;">Color Mode:</h5>
+            <div class="form-group">
+                <select class="form-control" name="coloringMode" id="coloringMode" data-role="slider"
+                        style="color: #000000">
+                    <option value="time">Time</option>
+                    <option value="magnitude">Magnitude</option>
+                </select>
+            </div>
+            <h5 style="text-align: left">Limit Displayed Events</h5>
+            <div class="input-group">
+                <input id="limit" maxlength="30" type="number" class="form-control" placeholder="e.g. '1000'">
+                <span class="input-group-btn">
+                    <button id="limitSet" onclick="limitSet" class="btn btn-primary" type="button"><span
+                            class="glyphicon glyphicon-eye-close"></span></button>
+                    </span>
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div id="graphs" class="col-sm-2 tabcontentRight" style="width: 35% !important;">
+        <ul class="tab"
+            style="z-index: 999; position: fixed; width: auto; background: rgba(46,74,110,1); overflow: visible">
+            <li><a class="tablinksGraphs" onclick="openTabGraphs(event, 'magHistogram')" style="font-size: 16px">Magnitude</a>
+            </li>
+            <li><a class="tablinksGraphs" onclick="openTabGraphs(event, 'depthHistogram')"
+                   style="font-size: 16px">Depth</a>
+            </li>
+            <li><a class="tablinksGraphs" onclick="openTabGraphs(event, 'TimeSeries')" style="font-size: 16px">Time
+                Series</a>
+            </li>
+        </ul>
+
+        <div class="tabcontentGraphs" id="magHistogram" style="display: initial;"></div>
+        <div class="tabcontentGraphs" id="depthHistogram"></div>
+        <div class="tabcontentGraphs" id="TimeSeries"></div>
+
+    </div>
+
+    <div id="information" class="col-sm-2 tabcontentRight" style="width: 25% !important;">
+        <ul class="tab"
+            style="z-index: 999; position: fixed; width: auto; background: rgba(46,74,110,1); overflow: visible">
+            <li><a class="tablinksInfo" onclick="openTabInfo(event, 'api_query_info');"
+                   style="font-size: 16px">Overview</a>
+            </li>
+            <li><a class="tablinksInfo" onclick="openTabInfo(event, 'event_info')" style="font-size: 16px">Event</a>
+            </li>
+            <li><a class="tablinksInfo" onclick="openTabInfo(event, 'draw_info')" style="font-size: 16px">Drawn</a></li>
+        </ul>
+
+    </div>
+
+    <div>
+
+
+
+        <table id="MagnitudeLegendTable" class="tablesorter"  style="border: 1px; font-size: 14px; position: fixed;bottom: 1%;right: 15%;width: 15%; display: none">
+            <tr>
+                <td style="text-align:center">Magnitude</td>
+                <td style="text-align:center"><img src="./images/Green.svg" width="20"/></td>
+                <td style="text-align:center"><img src="./images/Yellow.svg" width="30"/></td>
+                <td style="text-align:center"><img src="./images/Orange.svg" width="40"/></td>
+                <td style="text-align:center"><img src="./images/Red.svg" width="50"/></td>
+            </tr>
+            <tr>
+                <td style="text-align:center"> </td>
+                <td style="text-align:center"> 0 - 3</td>
+                <td style="text-align:center"> 3 - 5</td>
+                <td style="text-align:center"> 5 - 7</td>
+                <td style="text-align:center"> 7 - 10</td>
+            </tr>
+        </table>
+
+
+    </div>
 
 </div>
+
+<!--Spin.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+<!--JQuery and JQuery UI-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<!--Bootstrap-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<!--Perfect Scrollbar-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/js/perfect-scrollbar.jquery.js"></script>
+<!--Plotly.js-->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!--UI Controls-->
+<script type="text/javascript" src="ui_controls.js"></script>
+<!--Require.js and main app-->
+<script data-main="Control" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
 
 </body>
 </html>
